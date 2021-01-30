@@ -26,13 +26,4 @@ jobs:
           echo latestTag: ${{ steps.semver.outputs.latestTag }}
           echo nextVersion: ${{ steps.semver.outputs.nextVersion }}
           echo nextTag: ${{ steps.semver.outputs.nextTag }}
-      - name: Create Release
-        if: ${{ steps.semver.outputs.nextTag }} != ''
-        id: release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.semver.outputs.nextTag }}
-          release_name: v${{ steps.semver.outputs.nextVersion }}
-          body: ${{ steps.semver.outputs.changelog }}
+
