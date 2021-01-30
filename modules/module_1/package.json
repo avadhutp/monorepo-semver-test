@@ -1,5 +1,5 @@
 {
-  "name": "inc-semver-action",
+  "name": "module_1",
   "version": "1.0.0",
   "keywords": [
     "semver"
@@ -9,10 +9,6 @@
     "email": "github@tylerstewart.ca",
     "url": "https://tylerstewart.ca"
   },
-  "license": "ISC",
-  "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
-    "semver": "^7.3.2"
-  }
+  "license": "ISC"
 }
+

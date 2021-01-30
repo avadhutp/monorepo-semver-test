@@ -19,7 +19,7 @@ jobs:
         id: semver
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          directory: ./modules
+          directory: ./modules/module_1
       - name: Version Info
         run: |
           echo latestVersion: ${{ steps.semver.outputs.latestVersion }}
