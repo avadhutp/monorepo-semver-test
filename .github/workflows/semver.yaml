@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  get:
+  module_2:
     name: Main
     runs-on: ubuntu-latest
     steps:
@@ -17,10 +17,6 @@ jobs:
       - name: Determine Version
         uses: trs/inc-semver-action@master
         id: semver
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          directory: ./modules/module_1
-          prefix: module_1@v
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           directory: ./modules/module_2
@@ -41,4 +37,34 @@ jobs:
           tag_name: ${{ steps.semver.outputs.nextTag }}
           release_name: v${{ steps.semver.outputs.nextVersion }}
           body: ${{ steps.semver.outputs.changelog }}
-
+  module_1:
+    name: Main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Determine Version
+        uses: trs/inc-semver-action@master
+        id: semver
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          directory: ./modules/module_1
+          prefix: module_1@v
+      - name: Version Info
+        run: |
+          echo latestVersion: ${{ steps.semver.outputs.latestVersion }}
+          echo latestTag: ${{ steps.semver.outputs.latestTag }}
+          echo nextVersion: ${{ steps.semver.outputs.nextVersion }}
+          echo nextTag: ${{ steps.semver.outputs.nextTag }}
+      - name: Create Release
+        if: ${{ steps.semver.outputs.nextTag }} != ''
+        id: release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.semver.outputs.nextTag }}
+          release_name: v${{ steps.semver.outputs.nextVersion }}
+          body: ${{ steps.semver.outputs.changelog }}
