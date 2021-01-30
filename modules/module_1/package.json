@@ -1,14 +1,5 @@
 {
   "name": "module_1",
-  "version": "1.0.0",
-  "keywords": [
-    "semver"
-  ],
-  "author": {
-    "name": "Tyler Stewart",
-    "email": "github@tylerstewart.ca",
-    "url": "https://tylerstewart.ca"
-  },
-  "license": "ISC"
+  "version": "1.0.0"
 }
 
